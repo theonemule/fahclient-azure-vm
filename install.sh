@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt update
-apt install ubuntu-drivers-common
+apt install -y ubuntu-drivers-common
 
 export DEBIAN_FRONTEND=noninteractive 
 export DEBCONF_NONINTERACTIVE_SEEN=true
