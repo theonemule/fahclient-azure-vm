@@ -54,6 +54,6 @@ echo "<config>
   <power value='full'/>
   <gpu value='true'/>
   <fold-anon value='true'/>
-  <allow v='127.0.0.1 0/0'/>
-  <web-allow v='127.0.0.1 0/0'/>
+  <allow v='127.0.0.1 0.0.0.0/0  0/0'/>
+  <web-allow v='127.0.0.1 0.0.0.0/0 0/0'/>
 </config>" > /etc/fahclient/config.xml
