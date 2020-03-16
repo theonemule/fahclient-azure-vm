@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt update
-apt install -y ubuntu-drivers-common
+apt install -y ubuntu-drivers-common apache2-utils nginx
 
 export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
@@ -74,6 +74,29 @@ echo "<config>
 </config>
 " > /etc/fahclient/config.xml
 
-wget https://download.foldingathome.org/releases/public/release/fahclient/debian-testing-64bit/v7.4/fahclient_7.4.4_amd64.deb
+wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.5/latest.deb
 
-dpkg -i --force-depends fahclient_7.4.4_amd64.deb
+dpkg -i --force-depends latest.deb
+
+openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=US/ST=WA/L=REDMOND/O=Dis/CN=www.example.com" -keyout /etc/nginx/fah.key  -out /etc/nginx/fah.cert
+
+sudo htpasswd -b -c /etc/nginx/.htpasswd @USER @PASSWORD
+
+echo"server {
+	listen              443 ssl;
+	server_name         www.example.com;
+	keepalive_timeout   70;
+
+	ssl_certificate     /etc/nginx/fah.cert;
+	ssl_certificate_key /etc/nginx/fah.key;
+	ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers         HIGH:!aNULL:!MD5;
+
+	location / {
+		proxy_pass http://localhost:7396;
+		auth_basic "Administrators Area";
+		auth_basic_user_file /etc/nginx/.htpasswd;
+	}
+}
+" > /etc/nginx/sites-available/default
+

@@ -43,6 +43,7 @@
         },
         "enableWeb": {
             "defaultValue": "false",
+            "type": "String",			
             "allowedValues": [
                 "true",
                 "false"
@@ -193,12 +194,12 @@
                         }
                     },
                     {
-                        "name": "default-allow-fahremote",
+                        "name": "default-allow-fahremoteweb",
                         "properties": {
-                            "priority": 1001,
+                            "priority": 1002,
                             "sourceAddressPrefix": "*",
                             "protocol": "TCP",
-                            "destinationPortRange": "7396",
+                            "destinationPortRange": "443",
                             "access": "Allow",
                             "direction": "Inbound",
                             "sourcePortRange": "*",
@@ -275,7 +276,7 @@
     "outputs": {
         "httpSite": {
             "type": "String",
-            "value": "[concat('Conect via F@H Client or Web: ', parameters('dnsNameForPublicIP'), '.', resourceGroup().location, '.cloudapp.azure.com')]"
+            "value": "[concat('Conect via F@H Web: https://', parameters('dnsNameForPublicIP'), '.', resourceGroup().location, '.cloudapp.azure.com')]"
         }
     }
 }
