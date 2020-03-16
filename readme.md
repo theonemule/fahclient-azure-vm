@@ -2,7 +2,7 @@
 
 When working on finding a cure, researchers first narrow the search field using computational models. These computations take massive amounts of compute resources, so some labs allow the public to contribute compute resources they have on their personal computers to the project. They use a client called "Folding@Home". This app "folds" proteins in a simulated environment to discover potential proteins that can be used to treat diseases, including Covid 19
 
-You can download it here and install it and help find a cure for deiseases on  your computer at home. [https://foldingathome.org/](https://foldingathome.org/) Installing it is pretty easy for a home computer.
+You can download it here and install it and help find a cure for deiseases on  your computer at home here: [https://foldingathome.org/](https://foldingathome.org/). Installing it is pretty easy for a home computer.
 
 I worked on this little project today to get it running on a virtual machine on Azure. I am working out the bugs in an automation script to install it on Azure.
 
