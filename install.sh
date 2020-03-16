@@ -94,7 +94,7 @@ echo"server {
 
 	location / {
 		proxy_pass http://localhost:7396;
-		auth_basic "Administrators Area";
+		auth_basic 'Administrators Area';
 		auth_basic_user_file /etc/nginx/.htpasswd;
 	}
 }

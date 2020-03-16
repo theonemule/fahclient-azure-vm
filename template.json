@@ -40,17 +40,6 @@
             "metadata": {
                 "description": "The passkey for the Folding@Home client. Not neccessary if you don't care about recieving credit."
             }
-        },
-        "enableWeb": {
-            "defaultValue": "false",
-            "type": "String",			
-            "allowedValues": [
-                "true",
-                "false"
-            ],			
-            "metadata": {
-                "description": "Enable web access to the client. Not recommeded for non-anonymous clients."
-            }
         },		
         "vmSize": {
             "defaultValue": "Standard_NV6",
@@ -224,7 +213,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": "[split('https://raw.githubusercontent.com/theonemule/fahclient-azure-vm/master/install.sh', ' ')]",
-                    "commandToExecute": "[concat('bash install.sh --user=', parameters('fahUser'), ' --team=', parameters('fahTeam'), ' --passkey=', parameters('fahPasskey'), ' --password=', parameters('adminPassword'), ' --enableweb=', parameters('enableWeb'))]"
+                    "commandToExecute": "[concat('bash install.sh --user=', parameters('fahUser'), ' --team=', parameters('fahTeam'), ' --passkey=', parameters('fahPasskey'), ' --password=', parameters('adminPassword'))]"
                 }
             }
         },
