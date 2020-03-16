@@ -187,7 +187,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": "[split('https://raw.githubusercontent.com/theonemule/fahclient-azure-vm/master/install.sh', ' ')]",
-                    "commandToExecute": "[concat('bash install.sh --user=', parameters('fahUser'), ' --team=', parameters('fahTeam'), ' --passkey=', parameters('fahPasskey'))]"
+                    "commandToExecute": "[concat('bash install.sh --user=', parameters('fahUser'), ' --team=', parameters('fahTeam'), ' --passkey=', parameters('fahPasskey'), ' --password=', parameters('adminPassword'))]"
                 }
             }
         },
