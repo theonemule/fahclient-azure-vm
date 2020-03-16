@@ -30,7 +30,7 @@ I worked on this little project today to get it running on a virtual machine on 
 	* **Admin Username** -- Used for adminstration on the VM for SSH.
 	* **Admin Password** -- This password will be used for SSH access to the VM aas well as to logon to the Folding@Home client through the remote admin.
 	* **Fah User** -- The Fold@Home user to display for statistical purposes. You can leave this anonymous.
-	* **Fah Passkey **-- The Fold@Home Passkey is used to associate your client(s) with your work. If you do not care about recieving credit, simply leave it blank. If you want a Passkey, [sign up here](https://apps.foldingathome.org/getpasskey). You can sign up later and re-enter if you like in the web portal.
+	* **Fah Passkey** -- The Fold@Home Passkey is used to associate your client(s) with your work. If you do not care about recieving credit, simply leave it blank. If you want a Passkey, [sign up here](https://apps.foldingathome.org/getpasskey). You can sign up later and re-enter if you like in the web portal.
 	* **VM Size** -- D-Series VM's are chgeaper, but do not have GPU's. N-Series VM's are more expensive, but have avialble GPU's See the [pricing chart here for more details](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/).
 
 	***Under Terms and Conditions...***
