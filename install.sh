@@ -11,6 +11,7 @@ ubuntu-drivers autoinstall
 
 # defaults
 USER="anonymous"
+ADMINUSER="admin"
 PASSKEY=""
 TEAM="0"
 PASSWORD="password1"
@@ -18,25 +19,25 @@ ENABLEWEB="false"
 
 for i in "$@"
 do
-        case $i in
-                --user=*)
-                USER="${i#*=}"
-                ;;
-                --passkey=*)
-                PASSKEY="${i#*=}"
-                ;;
-                --team=*)
-                TEAM="${i#*=}"
-                ;;
-                --password=*)
-                PASSWORD="${i#*=}"
-                ;;
-                --enableweb=*)
-                ENABLEWEB="${i#*=}"
-                ;;
-                *)
-                ;;
-        esac
+	case $i in
+			--user=*)
+			USER="${i#*=}"
+			;;
+			--passkey=*)
+			PASSKEY="${i#*=}"
+			;;
+			--team=*)
+			TEAM="${i#*=}"
+			;;
+			--password=*)
+			PASSWORD="${i#*=}"
+			;;
+			--adminuser=*)
+			ADMINUSER="${i#*=}"
+			;;
+			*)
+			;;
+	esac
 done
 
 echo "fahclient       fahclient/user  string  $USER
@@ -59,8 +60,6 @@ if [ "$ENABLEWEB" = "true" ]; then
     ip='127.0.0.1 0.0.0.0/0'
 fi
 
-ENABLEWEB
-
 echo "<config>
   <user value='$USER'/>
   <team value='$TEAM'/>
@@ -80,7 +79,7 @@ dpkg -i --force-depends latest.deb
 
 openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=US/ST=WA/L=REDMOND/O=Dis/CN=www.example.com" -keyout /etc/nginx/fah.key  -out /etc/nginx/fah.cert
 
-htpasswd -b -c /etc/nginx/.htpasswd $USER $PASSWORD
+htpasswd -b -c /etc/nginx/.htpasswd $ADMINUSER $PASSWORD
 
 echo "server {
 	listen              443 ssl;
@@ -99,4 +98,6 @@ echo "server {
 	}
 }
 " > /etc/nginx/sites-available/default
+
+systemctl restart nginx
 
