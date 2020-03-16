@@ -15,7 +15,6 @@ ADMINUSER="admin"
 PASSKEY=""
 TEAM="0"
 PASSWORD="password1"
-ENABLEWEB="false"
 
 for i in "$@"
 do
@@ -55,11 +54,6 @@ if [ "$USER" = "anonymous" ]; then
     anon='true'
 fi
 
-ip="127.0.0.1"
-if [ "$ENABLEWEB" = "true" ]; then
-    ip='127.0.0.1 0.0.0.0/0'
-fi
-
 echo "<config>
   <user value='$USER'/>
   <team value='$TEAM'/>
@@ -68,7 +62,7 @@ echo "<config>
   <gpu value='true'/>
   <fold-anon value='$anon'/>
   <allow>127.0.0.1 0.0.0.0/0</allow>
-  <web-allow>$ip</web-allow>
+  <web-allow>127.0.0.1 0.0.0.0/0</web-allow>
   <password>$PASSWORD</password>
 </config>
 " > /etc/fahclient/config.xml
