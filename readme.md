@@ -2,9 +2,9 @@
 
 When working on finding a cure, researchers first narrow the search field using computational models. These computations take massive amounts of compute resources, so some labs allow the public to contribute compute resources they have on their personal computers to the project. They use a client called "Folding@Home". This app "folds" proteins in a simulated environment to discover potential proteins that can be used to treat diseases, including Covid 19
 
-You can download it here and install it and help find a cure for deiseases on  your computer at home. https://foldingathome.org/ Installing it is pretty easy for a home computer.
+You can download it here and install it and help find a cure for deiseases on  your computer at home. [https://foldingathome.org/](https://foldingathome.org/) Installing it is pretty easy for a home computer.
 
-I worked on this little project today to get it running on a virtual machine on Azure. I am working out the bugs in an automation script to install iton Azure.
+I worked on this little project today to get it running on a virtual machine on Azure. I am working out the bugs in an automation script to install it on Azure. This script installs the NVidia Drivers for the VM if you're using GPU's, installs and configures tre Fold@home software, and then proxies the Web Portal with an SSL reverse proxy and adds a logon to it so that accessing the web bortal over the intenet is secure.
 
 ###Deploy to Azure###
 
@@ -44,16 +44,18 @@ I worked on this little project today to get it running on a virtual machine on 
 
 1. Once the virtual machine deploys, you can logon to the web client by browsing to https://dnsname.region.cloudapp.azure.com where *dnsname* is the the name of the dns entry you entered when you created the VM and *region* is the shortcode for the Azure region. If you aren't sure, then browse in the Azure Portal to Resource Groups on the left, select the resouce group you created when you deployed the VM, then click on fahclientVM. You'll find the DNS name on the Overview blade.
 
-	![Create VM on Azure](./images/name.png)
+	![DNS Name](./images/name.png)
 
 1. You will probably get a messaage about the site not being secure. **THIS IS OK!** If you click on "Advanced" in Chrome, you can bypass this error. 
 
 1. After bypassing the error, you will be prompted for your credentials. Enter the Admin Username for th Username and the Admin Password for the Password you entered when you created the virtual machine.
 
-	![Create VM on Azure](./images/sign-in.png)
+	![Sign In](./images/sign-in.png)
 
 
 1. If all goes well, you should see the Folding@home web portal.
+
+	![Web portal](./images/web-portal.png)
 
 
 ###Advanced Controls (AKA FAHControl)###
