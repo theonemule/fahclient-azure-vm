@@ -168,19 +168,6 @@
                             "sourcePortRange": "*",
                             "destinationAddressPrefix": "*"
                         }
-                    },
-                    {
-                        "name": "default-allow-fahclient",
-                        "properties": {
-                            "priority": 1100,
-                            "sourceAddressPrefix": "*",
-                            "protocol": "UDP",
-                            "destinationPortRange": "7396",
-                            "access": "Allow",
-                            "direction": "Inbound",
-                            "sourcePortRange": "*",
-                            "destinationAddressPrefix": "*"
-                        }
                     }
                 ]
             }
@@ -252,7 +239,7 @@
     "outputs": {
         "httpSite": {
             "type": "String",
-            "value": "[concat('Browse to: ', parameters('dnsNameForPublicIP'), '.', resourceGroup().location, '.cloudapp.azure.com and logon with u:admin p:', parameters('adminPassword'))]"
+            "value": "[concat('Conect via SSH: ', parameters('adminUsername'), '@', resourceGroup().location, '.cloudapp.azure.com -L 8080:127.0.0.1:7396. Use the password supplied. Then browse to http://localhost:8080 to load the web console for Fold@Home.')]"
         }
     }
 }

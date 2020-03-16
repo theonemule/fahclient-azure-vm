@@ -3,36 +3,36 @@
 apt update
 apt install ubuntu-drivers-common
 
-export DEBIAN_FRONTEND=noninteractive 
+export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
 
 ubuntu-drivers devices
-ubuntu-drivers autoinstall 	
+ubuntu-drivers autoinstall
 
-# defaults 
+# defaults
 USER="anonymous"
 PASSKEY=""
 TEAM="0"
-
+PASSWORD="password1"
 
 for i in "$@"
 do
-	case $i in
-		--user=*)
-		USER="${i#*=}"
-		;;
-		--passkey=*)
-		PASSKEY="${i#*=}"
-		;;
-		--team=*)
-		TEAM="${i#*=}"
-		;;
-		--password=*)
-		PASSWORD="${i#*=}"
-		;;
-		*)
-		;;
-	esac
+        case $i in
+                --user=*)
+                USER="${i#*=}"
+                ;;
+                --passkey=*)
+                PASSKEY="${i#*=}"
+                ;;
+                --team=*)
+                TEAM="${i#*=}"
+                ;;
+                --password=*)
+                PASSWORD="${i#*=}"
+                ;;
+                *)
+                ;;
+        esac
 done
 
 echo "fahclient       fahclient/user  string  $USER
@@ -47,13 +47,20 @@ wget https://download.foldingathome.org/releases/public/release/fahclient/debian
 
 sudo dpkg -i --force-depends fahclient_7.4.4_amd64.deb
 
+anon='false'
+if [ "$USER" = "anonymous" ]; then
+    anon='true'
+fi
+
+
 echo "<config>
-  <user value='$USER'/> 
-  <team value='$TEAM'/>    
-  <passkey value='$PASSKEY'/>  
-  <power value='full'/>
-  <gpu value='true'/>
-  <fold-anon value='true'/>
-  <allow v='127.0.0.1 0.0.0.0/0  0/0'/>
-  <web-allow v='127.0.0.1 0.0.0.0/0 0/0'/>
-</config>" > /etc/fahclient/config.xml
+  <user v='$USER'/>
+  <team v='$TEAM'/>
+  <passkey v='$PASSKEY'/>
+  <power v='full'/>
+  <gpu v='true'/>
+  <fold-anon v='$anon'/>
+  <allow>127.0.0.1 0/0</allow>
+  <web-allow>127.0.0.1 0/0</web-allow>
+</config>
+" > /etc/fahclient/config.xml
