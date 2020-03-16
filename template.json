@@ -181,6 +181,19 @@
                             "sourcePortRange": "*",
                             "destinationAddressPrefix": "*"
                         }
+                    },
+                    {
+                        "name": "default-allow-fahremote",
+                        "properties": {
+                            "priority": 1001,
+                            "sourceAddressPrefix": "*",
+                            "protocol": "TCP",
+                            "destinationPortRange": "7396",
+                            "access": "Allow",
+                            "direction": "Inbound",
+                            "sourcePortRange": "*",
+                            "destinationAddressPrefix": "*"
+                        }
                     }					
                 ]
             }
@@ -252,7 +265,7 @@
     "outputs": {
         "httpSite": {
             "type": "String",
-            "value": "[concat('Conect via SSH: ', parameters('adminUsername'), '@', parameters('dnsNameForPublicIP'), '.', resourceGroup().location, '.cloudapp.azure.com -L 8080:127.0.0.1:7396 -L 8080:127.0.0.1:36330. Use the password supplied.')]"
+            "value": "[concat('Conect via F@H Client or Web: ', parameters('dnsNameForPublicIP'), '.', resourceGroup().location, '.cloudapp.azure.com')]"
         }
     }
 }
