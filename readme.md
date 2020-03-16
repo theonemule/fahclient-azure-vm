@@ -4,7 +4,9 @@ When working on finding a cure, researchers first narrow the search field using 
 
 You can download it here and install it and help find a cure for deiseases on  your computer at home. [https://foldingathome.org/](https://foldingathome.org/) Installing it is pretty easy for a home computer.
 
-I worked on this little project today to get it running on a virtual machine on Azure. I am working out the bugs in an automation script to install it on Azure. This script installs the NVidia Drivers for the VM if you're using GPU's, installs and configures tre Fold@home software, and then proxies the Web Portal with an SSL reverse proxy and adds a logon to it so that accessing the web bortal over the intenet is secure.
+I worked on this little project today to get it running on a virtual machine on Azure. I am working out the bugs in an automation script to install it on Azure.
+
+This script installs the NVidia Drivers for the VM if you're using GPU's, installs and configures tre Fold@home software, and then proxies the Web Portal with an SSL reverse proxy and adds a logon to it so that accessing the web bortal over the intenet is secure. It also deploys the Azure VM and configures all the Azure resources automatically.
 
 ### Deploy to Azure
 
