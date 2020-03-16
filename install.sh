@@ -60,7 +60,7 @@ echo "<config>
   <power v='full'/>
   <gpu v='true'/>
   <fold-anon v='$anon'/>
-  <allow>127.0.0.1 0/0</allow>
-  <web-allow>127.0.0.1 0/0</web-allow>
+  <allow>127.0.0.1 0.0.0.0/0 0/0</allow>
+  <password>$PASSWORD</password>
 </config>
 " > /etc/fahclient/config.xml
