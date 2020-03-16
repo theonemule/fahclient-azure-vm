@@ -43,24 +43,26 @@ fahclient       fahclient/team  string  $TEAM" > ~/conf.txt
 
 debconf-set-selections ~/conf.txt
 
-wget https://download.foldingathome.org/releases/public/release/fahclient/debian-testing-64bit/v7.4/fahclient_7.4.4_amd64.deb
-
-sudo dpkg -i --force-depends fahclient_7.4.4_amd64.deb
+mkdir -p /etc/fahclient/
 
 anon='false'
 if [ "$USER" = "anonymous" ]; then
     anon='true'
 fi
 
-
 echo "<config>
-  <user v='$USER'/>
-  <team v='$TEAM'/>
-  <passkey v='$PASSKEY'/>
-  <power v='full'/>
-  <gpu v='true'/>
-  <fold-anon v='$anon'/>
-  <allow>127.0.0.1 0.0.0.0/0 0/0</allow>
+  <user value='$USER'/>
+  <team value='$TEAM'/>
+  <passkey value='$PASSKEY'/>
+  <power value='full'/>
+  <gpu value='true'/>
+  <fold-anon value='$anon'/>
+  <allow>127.0.0.1 0.0.0.0/0</allow>
+  <web-allow>127.0.0.1 0.0.0.0/0</web-allow>
   <password>$PASSWORD</password>
 </config>
 " > /etc/fahclient/config.xml
+
+wget https://download.foldingathome.org/releases/public/release/fahclient/debian-testing-64bit/v7.4/fahclient_7.4.4_amd64.deb
+
+dpkg -i --force-depends fahclient_7.4.4_amd64.deb

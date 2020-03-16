@@ -42,7 +42,7 @@
             }
         },
         "vmSize": {
-            "defaultValue": "Standard_D1_v2",
+            "defaultValue": "Standard_NV6",
             "allowedValues": [
                 "Standard_D1_v2",
                 "Standard_D2_v2",
