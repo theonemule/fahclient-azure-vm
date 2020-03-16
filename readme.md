@@ -1,4 +1,4 @@
-##DID YOU KNOW that you can help find a CURE for dieseases like Covid19 (aka CORONAVIRUS) using your Azure?##
+###DID YOU KNOW that you can help find a CURE for dieseases like Covid19 (aka CORONAVIRUS) using your Azure?
 
 When working on finding a cure, researchers first narrow the search field using computational models. These computations take massive amounts of compute resources, so some labs allow the public to contribute compute resources they have on their personal computers to the project. They use a client called "Folding@Home". This app "folds" proteins in a simulated environment to discover potential proteins that can be used to treat diseases, including Covid 19
 
@@ -6,7 +6,7 @@ You can download it here and install it and help find a cure for deiseases on  y
 
 I worked on this little project today to get it running on a virtual machine on Azure. I am working out the bugs in an automation script to install it on Azure. This script installs the NVidia Drivers for the VM if you're using GPU's, installs and configures tre Fold@home software, and then proxies the Web Portal with an SSL reverse proxy and adds a logon to it so that accessing the web bortal over the intenet is secure.
 
-###Deploy to Azure###
+### Deploy to Azure
 
 1. Click Deploy to Azure 
 
@@ -58,7 +58,7 @@ I worked on this little project today to get it running on a virtual machine on 
 	![Web portal](./images/web-portal.png)
 
 
-###Advanced Controls (AKA FAHControl)###
+### Advanced Controls (AKA FAHControl)
 
 For more advanced users, you can use the Advanced Controls that are installed with Folding@home. This utility allows you to connect to multiple clients that are running the Fold@home software. You can launch it from the tool tray menu in Windows or from the app from your Start Menu or App Folder on Mac
 
