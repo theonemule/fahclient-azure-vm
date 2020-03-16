@@ -80,7 +80,7 @@ dpkg -i --force-depends latest.deb
 
 openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=US/ST=WA/L=REDMOND/O=Dis/CN=www.example.com" -keyout /etc/nginx/fah.key  -out /etc/nginx/fah.cert
 
-sudo htpasswd -b -c /etc/nginx/.htpasswd @USER @PASSWORD
+htpasswd -b -c /etc/nginx/.htpasswd $USER $PASSWORD
 
 echo "server {
 	listen              443 ssl;
