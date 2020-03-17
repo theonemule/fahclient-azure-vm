@@ -1,4 +1,4 @@
-### DID YOU KNOW that you can help find a CURE for dieseases like Covid19 (aka CORONAVIRUS) using your Azure?
+### DID YOU KNOW that you can help find a CURE for diseases like Covid19 (aka CORONAVIRUS) using your Azure?
 
 When working on finding a cure, researchers first narrow the search field using computational models. These computations take massive amounts of compute resources, so some labs allow the public to contribute compute resources they have on their personal computers to the project. They use a client called "Folding@Home". This app "folds" proteins in a simulated environment to discover potential proteins that can be used to treat diseases, including Covid 19
 
