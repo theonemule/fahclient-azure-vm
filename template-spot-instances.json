@@ -50,7 +50,7 @@
                 "Standard_D4_v2",
                 "Standard_D5_v2",
 				"Standard_NV4as_v4",
-				"Standard_NV4as_v4"
+				"Standard_NV8as_v4",
 				"Standard_NV16as_v4",
 				"Standard_NV32as_v4",
                 "Standard_NV6",
@@ -61,7 +61,15 @@
             "metadata": {
                 "description": "The size of the VM you want. Use a D series for no GPU, and N series for GPU"
             }
-        }
+        },
+        "spotInstanceMaxPrice": {
+            "defaultValue": "-1",
+            "type": "String",
+            "metadata": {
+                "description": "The max price you want to pay for a VM before eviction."
+            }
+        }		
+		
     },
     "variables": {
         "storageAccountName": "[concat(uniquestring(resourceGroup().id),'storage')]",
@@ -82,6 +90,7 @@
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
         "apiVersion": "2015-06-15"
+
     },
     "resources": [
         {
@@ -222,8 +231,8 @@
             }
         },
         {
+            "apiVersion": "2019-03-01",
             "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2016-04-30-preview",
             "name": "[variables('vmName')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
@@ -262,7 +271,12 @@
                         "enabled": "true",
                         "storageUri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName')), variables('apiVersion')).primaryEndpoints.blob)]"
                     }
-                }
+                },
+                "priority": "Spot",
+                "evictionPolicy": "Deallocate",
+                "billingProfile": {
+                    "maxPrice": "[parameters('spotInstanceMaxPrice')]"
+                }				
             }
         }
     ],
