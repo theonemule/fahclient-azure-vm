@@ -67,7 +67,7 @@ echo "<config>
 </config>
 " > /etc/fahclient/config.xml
 
-wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.5/latest.deb
+wget https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/latest.deb
 
 dpkg -i --force-depends latest.deb
 
