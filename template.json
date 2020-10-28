@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "dnsNameForPublicIP": {
@@ -67,7 +67,6 @@
         "storageAccountName": "[concat(uniquestring(resourceGroup().id),'storage')]",
         "imagePublisher": "Canonical",
         "imageOffer": "UbuntuServer",
-        "OSDiskName": "fahclient-vhd",
         "imageSKU": "18.04-LTS",
         "nicName": "fahclientNic",
         "addressPrefix": "10.0.0.0/16",
@@ -76,7 +75,6 @@
         "storageAccountType": "Standard_LRS",
         "publicIPAddressName": "fahclientPublicIP",
         "publicIPAddressType": "Dynamic",
-        "vmStorageAccountContainerName": "vhds",
         "vmName": "fahclientVM",
         "virtualNetworkName": "fahclientVNET",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
@@ -85,17 +83,20 @@
     },
     "resources": [
         {
+            "sku" : {
+                "name": "[variables('storageAccountType')]",
+                "tier": "Standard"
+            },
+            "kind": "StorageV2",
             "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2019-06-01",
             "name": "[variables('storageAccountName')]",
             "location": "[resourceGroup().location]",
-            "properties": {
-                "accountType": "[variables('storageAccountType')]"
-            }
+            "properties": {}
         },
         {
             "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-05-01",
             "name": "[variables('publicIPAddressName')]",
             "location": "[resourceGroup().location]",
             "properties": {
@@ -107,7 +108,7 @@
         },
         {
             "type": "Microsoft.Network/virtualNetworks",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-05-01",
             "name": "[variables('virtualNetworkName')]",
             "location": "[resourceGroup().location]",
             "properties": {
@@ -128,7 +129,7 @@
         },
         {
             "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "[variables('apiVersion')]",
+            "apiVersion": "2020-05-01",
             "name": "[variables('nicName')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
@@ -155,8 +156,8 @@
         },
         {
             "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2016-09-01",
-            "name": "['fahclient-nsg']",
+            "apiVersion": "2020-05-01",
+            "name": "fahclient-nsg",
             "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [
@@ -204,7 +205,7 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "['2015-06-15']",
+            "apiVersion": "2019-07-01",
             "name": "[concat(variables('vmName'),'/', 'fahclient-setup')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
@@ -216,14 +217,16 @@
                 "typeHandlerVersion": "2.0",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
-                    "fileUris": "[split('https://raw.githubusercontent.com/theonemule/fahclient-azure-vm/master/install.sh', ' ')]",
+                    "fileUris": ["https://raw.githubusercontent.com/theonemule/fahclient-azure-vm/master/install.sh"],
                     "commandToExecute": "[concat('bash install.sh --user=', parameters('fahUser'), ' --team=', parameters('fahTeam'), ' --passkey=', parameters('fahPasskey'), ' --password=', parameters('adminPassword'), ' --adminuser=', parameters('adminUsername'))]"
+                },
+                "protectedSettings": {
                 }
             }
         },
         {
             "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2016-04-30-preview",
+            "apiVersion": "2019-07-01",
             "name": "[variables('vmName')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
@@ -259,7 +262,7 @@
                 },
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
-                        "enabled": "true",
+                        "enabled": true,
                         "storageUri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName')), variables('apiVersion')).primaryEndpoints.blob)]"
                     }
                 }
